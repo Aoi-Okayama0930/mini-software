@@ -14,3 +14,8 @@ $ docker compose up
 - データベース: SQLite
 - Docker: 開発環境の統一、バックエンド・データベースのコンテナ化
 - GitHub: コード管理、ブランチ戦略、プルリクエストの実践
+### チームメンバー
+- Yuto Morioka
+## Affiliation
+This project was created by Shikidalab.
+

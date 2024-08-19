@@ -1,5 +1,0 @@
-fastapi
-uvicorn[standard]
-sqlite-utils
-jinja2
-python-multipart
