@@ -8,13 +8,13 @@
 $ docker compose up
 ```
 2. http://127.0.0.1 にアクセスしてアプリを利用
-### 技術スタック:
+### Technology stack:
 - フロントエンド: BootstrapでスタイリングしたHTML/CSS/JavaScript
 - バックエンド: FastAPI
 - データベース: SQLite
 - Docker: 開発環境の統一、バックエンド・データベースのコンテナ化
 - GitHub: コード管理、ブランチ戦略、プルリクエストの実践
-### チームメンバー
+### Team Member
 - Yuto Morioka
 ## Affiliation
 This project was created by Shikidalab.
