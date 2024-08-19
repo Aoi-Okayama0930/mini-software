@@ -16,6 +16,7 @@ $ docker compose up
 - GitHub: コード管理、ブランチ戦略、プルリクエストの実践
 ### Team Member
 - Yuto Morioka
+- Takumi Konishi
 ## Affiliation
 This project was created by Shikidalab.
 
