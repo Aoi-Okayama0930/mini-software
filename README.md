@@ -17,6 +17,7 @@ $ docker compose up
 ### Team Member
 - Yuto Morioka
 - Takumi Konishi
+- Manami Tanaka
 ## Affiliation
 This project was created by Shikidalab.
 
