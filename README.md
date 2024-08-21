@@ -18,6 +18,7 @@ $ docker compose up
 - Yuto Morioka
 - Takumi Konishi
 - Manami Tanaka
+- Okayama Aoi
 ## Affiliation
 This project was created by Shikidalab.
 
