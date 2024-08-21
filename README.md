@@ -20,6 +20,7 @@ $ docker compose up
 - Kato Hiyori
 - Manami Tanaka
 - Okayama Aoi
+- Ayaka Yamashita
 ## Affiliation
 This project was created by Shikidalab.
 
