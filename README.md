@@ -1,23 +1,25 @@
 # mini-software-engineering 2024 summer
-- docker-compose‚ÅƒAƒvƒŠƒRƒ“??ƒi‚ÆnginxƒRƒ“??ƒi‚ğŠÇ??‚·‚é
+- docker-composeï¿½ÅƒAï¿½vï¿½ï¿½ï¿½Rï¿½ï¿½??ï¿½iï¿½ï¿½nginxï¿½Rï¿½ï¿½??ï¿½iï¿½ï¿½ï¿½ï¿½??ï¿½ï¿½ï¿½ï¿½
 ### Requirements
 - Docker
 ### Getting Started
-1. ƒRƒ“??ƒi‹N??
+1. ï¿½Rï¿½ï¿½??ï¿½iï¿½N??
 ```
 $ docker compose up
 ```
-2. http://127.0.0.1 ‚ÉƒAƒNƒZƒX‚µ‚ÄƒAƒvƒŠ‚ğ—˜—p
+2. http://127.0.0.1 ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½ÄƒAï¿½vï¿½ï¿½ï¿½ğ—˜—p
 ### Technology stack:
-- ƒtƒƒ“ƒgƒGƒ“??: Bootstrap‚ÅƒXƒ^ƒCƒŠƒ“ƒO‚µ‚½HTML/CSS/JavaScript
-- ƒoƒbƒNƒGƒ“??: FastAPI
-- ??[ƒ^ƒx???ƒX: SQLite
-- Docker: ŠJ”­ŠÂ??‚Ì“ˆêAƒo??ƒNƒGƒ“ƒh?????[ƒ^ƒx???ƒX‚ÌƒRƒ“??ƒi‰»
-- GitHub: ƒR[ƒhŠÇ??Aƒuƒ‰ƒ“ƒ`í—ªA???ƒ‹ƒŠƒNƒGƒXƒg???À‘H
+- ï¿½tï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Gï¿½ï¿½??: Bootstrapï¿½ÅƒXï¿½^ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½HTML/CSS/JavaScript
+- ï¿½oï¿½bï¿½Nï¿½Gï¿½ï¿½??: FastAPI
+- ??ï¿½[ï¿½^ï¿½x???ï¿½X: SQLite
+- Docker: ï¿½Jï¿½ï¿½ï¿½ï¿½??ï¿½Ì“ï¿½ï¿½ï¿½Aï¿½o??ï¿½Nï¿½Gï¿½ï¿½ï¿½h?????ï¿½[ï¿½^ï¿½x???ï¿½Xï¿½ÌƒRï¿½ï¿½??ï¿½iï¿½ï¿½
+- GitHub: ï¿½Rï¿½[ï¿½hï¿½ï¿½??ï¿½Aï¿½uï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½í—ªï¿½A???ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½g???ï¿½ï¿½ï¿½H
 ### Team Member
 - Yuto Morioka
 - Takumi Konishi
 - Kato Hiyori
+- Manami Tanaka
+- Okayama Aoi
 ## Affiliation
 This project was created by Shikidalab.
 
