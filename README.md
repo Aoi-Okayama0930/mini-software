@@ -3,11 +3,12 @@
 ### Requirements
 - Docker
 ### Getting Started
-1. コンテナ起動
-```
-$ docker compose up
-```
-2. http://127.0.0.1 にアクセスしてアプリを利用
+1. `.env.sample` を参考に `.env` ファイルを作成。
+2. 以下のコマンドでコンテナを起動:
+    ```bash
+    $ docker compose up
+    ```
+3. ブラウザで [http://127.0.0.1](http://127.0.0.1) にアクセスし、アプリケーションを利用。
 ### Technology stack:
 - フロントエンド: BootstrapでスタイリングしたHTML/CSS/JavaScript
 - バックエンド: FastAPI
