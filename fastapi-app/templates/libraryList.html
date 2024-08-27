@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Library List
+{% endblock %}
+
+{% block content %}
+<h1>図書リスト</h1>
+
+<!-- キーワード検索フォーム -->
+<form action="{{ url_for('showLibrary') }}" method="get">
+    <div class="form-group">
+        <label for="search_keyword">キーワード検索</label>
+        <select id="search_keyword" name="search_keyword" class="form-control">
+            <option value="">全てのキーワード</option>
+            {% for keyword in keywords %}
+            <option value="{{ keyword[0] }}">{{ keyword[0] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">検索</button>
+</form>
+
+<!-- 図書リストを表示 -->
+<div class="book-list mt-4">
+    {% for book in books %}
+    <div class="book-item">
+        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover">
+        <h2>{{ book[1] }}</h2>
+        <p>{{ book[2] }}</p>
+        <p>キーワード: {{ book[4] }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

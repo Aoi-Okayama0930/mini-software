@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+Library Home
+{% endblock %}
+
+{% block content %}
+<h1>研究室図書管理</h1>
+
+<!-- 図書リストを表示 -->
+<div class="book-list">
+    {% for book in books %}
+    <div class="book-item">
+        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover">
+        <h2>{{ book[1] }}</h2>
+        <p>{{ book[2] }}</p>
+        <p>キーワード: {{ book[4] }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 書籍追加ページへのリンク -->
+<a class="btn btn-primary" href="{{ url_for('add_book') }}">書籍を追加</a>
+{% endblock %}
