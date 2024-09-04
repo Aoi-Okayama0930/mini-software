@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Request, Form, UploadFile, File
+from fastapi import FastAPI, Request, Form, UploadFile, File, HTTPException
 from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 import sqlite3
 from pathlib import Path
 import shutil
+import os
 
 # FastAPIアプリケーションのインスタンスを作成
 app = FastAPI()
@@ -21,30 +22,36 @@ Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
 # データベースの初期化関数
 def init_db():
+    # データベースに接続
     connection = sqlite3.connect(DB_NAME)
     cursor = connection.cursor()
+    # contactsテーブルを作成 (存在しない場合のみ)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS books (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            author TEXT NOT NULL,
-            isbn TEXT NOT NULL,
-            keywords TEXT,
-            cover_image TEXT
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                author TEXT NOT NULL,
+                isbn TEXT NOT NULL,
+                keywords TEXT,
+                cover_image TEXT
         )
     ''')
+    # 初期データの挿入 (任意)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS keywords (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            keyword TEXT NOT NULL
-        )
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                keyword TEXT NOT NULL UNIQUE
+            )
     ''')
+    # 変更を保存し、接続を閉じる
     connection.commit()
     connection.close()
+
 
 @app.on_event("startup")
 async def startup():
     init_db()
+
 
 # ホームページを表示するエンドポイント
 @app.get("/", response_class=HTMLResponse)
@@ -65,11 +72,14 @@ async def add_book(request: Request):
 # 新しい書籍を追加するエンドポイント
 @app.post("/addBook")
 async def addBook(request: Request, title: str = Form(...), author: str = Form(...), isbn: str = Form(...), 
-                  keywords: str = Form(...), cover_image: UploadFile = File(...)):
-    # 画像ファイルを保存
-    cover_image_path = UPLOAD_FOLDER + cover_image.filename
-    with open(cover_image_path, "wb") as buffer:
-        shutil.copyfileobj(cover_image.file, buffer)
+                  keywords: str = Form(""), cover_image: UploadFile = File(None)):
+    cover_image_filename = None
+
+    if cover_image and cover_image.filename != "":
+        cover_image_filename = cover_image.filename
+        cover_image_path = os.path.join(UPLOAD_FOLDER, cover_image_filename)
+        with open(cover_image_path, "wb") as buffer:
+            shutil.copyfileobj(cover_image.file, buffer)
     
     # 書籍情報をデータベースに保存
     with sqlite3.connect(DB_NAME) as conn:
@@ -77,16 +87,25 @@ async def addBook(request: Request, title: str = Form(...), author: str = Form(.
         cursor.execute('''
             INSERT INTO books (title, author, isbn, keywords, cover_image) 
             VALUES (?, ?, ?, ?, ?)
-        ''', (title, author, isbn, keywords, cover_image.filename))
-        # キーワードをデータベースに保存
-        for keyword in keywords.split(','):
-            cursor.execute('''
-                INSERT INTO keywords (keyword) 
-                VALUES (?)
-                ON CONFLICT(keyword) DO NOTHING
-            ''', (keyword.strip(),))
+        ''', (title, author, isbn, keywords if keywords else None, cover_image_filename))
+        
+        # キーワードが入力されていた場合のみ処理
+        if keywords:
+            for keyword in keywords.split(','):
+                try:
+                    cursor.execute('''
+                        INSERT INTO keywords (keyword) 
+                        VALUES (?)
+                    ''', (keyword.strip(),))
+                except sqlite3.IntegrityError:
+                    # すでに存在するキーワードの場合は無視
+                    pass
+
         conn.commit()
+
     return RedirectResponse(url='/', status_code=303)
+
+
 
 # 図書リストを表示するエンドポイント
 @app.get('/showLibrary', response_class=HTMLResponse)
