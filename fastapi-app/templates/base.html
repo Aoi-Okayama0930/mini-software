@@ -17,6 +17,24 @@
     </style>
 </head>
 <body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">ShikidaLab Book Library</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('add_book') }}">New Book Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('all_books') }}">Index of All Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Apply to Rent Books</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="container">
         {% block content %}{% endblock %}
     </div>
