@@ -1,19 +1,48 @@
 {% extends "base.html" %}
 
 {% block title %}
-ShikidaLab Book Library
+Welcome to ShikidaLab Book Library
 {% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1>Welcome to ShikidaLab Book Library !!</h1>
-    <p>The system made by 3rd year student in 2024 summer vacation</p>
-    <p>You can register, search and apply to rent books</p>
-    
-    <!-- ボタン配置 -->
-    <a href="{{ url_for('add_book') }}" class="btn btn-info btn-lg">New Book</a>
-    <a href="{{ url_for('all_books') }}" class="btn btn-success btn-lg">Index of All Books</a>
-
-    <p class="mt-4">CopyRight ShikidaLab@KUT</p>
+<!-- Hero Section -->
+<div class="hero bg-light text-dark text-center py-5">
+    <div class="container">
+        <h1 class="display-4 font-weight-bold mb-4">Welcome to ShikidaLab Book Library!</h1>
+        <p class="lead mb-4">The system created by a 3rd year student in the 2024 summer vacation. You can register, search, and apply to rent books here.</p>
+        <div class="d-flex justify-content-center">
+            <a href="{{ url_for('add_book') }}" class="btn btn-lg btn-info mx-2">New Book Registration</a>
+            <a href="{{ url_for('showLibrary') }}" class="btn btn-lg btn-success mx-2">Index of All Books</a>
+        </div>
+    </div>
 </div>
+
+<!-- Features Section -->
+<div class="container text-center py-5">
+    <h2 class="font-weight-bold mb-4">Library Features</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <i class="fas fa-book fa-3x text-primary mb-3"></i>
+            <h5>Manage Books</h5>
+            <p>Easily add, search, and manage books in your library collection.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-search fa-3x text-info mb-3"></i>
+            <h5>Search Keywords</h5>
+            <p>Find books quickly using keyword-based search functionality.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-share fa-3x text-success mb-3"></i>
+            <h5>Apply to Rent</h5>
+            <p>Submit a request to rent books online with ease.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light py-3">
+    <div class="container text-center">
+        <p>CopyRight ShikidaLab@KUT 2024</p>
+    </div>
+</footer>
 {% endblock %}
