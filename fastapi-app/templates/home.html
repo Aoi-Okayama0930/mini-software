@@ -1,24 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-Library Home
+ShikidaLab Book Library
 {% endblock %}
 
 {% block content %}
-<h1>研究室図書管理</h1>
+<div class="text-center">
+    <h1>Welcome to ShikidaLab Book Library !!</h1>
+    <p>The system made by 3rd year student in 2024 summer vacation</p>
+    <p>You can register, search and apply to rent books</p>
+    
+    <!-- ボタン配置 -->
+    <a href="{{ url_for('add_book') }}" class="btn btn-info btn-lg">New Book</a>
+    <a href="{{ url_for('all_books') }}" class="btn btn-success btn-lg">Index of All Books</a>
 
-<!-- 図書リストを表示 -->
-<div class="book-list">
-    {% for book in books %}
-    <div class="book-item">
-        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover">
-        <h2>{{ book[1] }}</h2>
-        <p>{{ book[2] }}</p>
-        <p>キーワード: {{ book[4] }}</p>
-    </div>
-    {% endfor %}
+    <p class="mt-4">CopyRight ShikidaLab@KUT</p>
 </div>
-
-<!-- 書籍追加ページへのリンク -->
-<a class="btn btn-primary" href="{{ url_for('add_book') }}">書籍を追加</a>
 {% endblock %}

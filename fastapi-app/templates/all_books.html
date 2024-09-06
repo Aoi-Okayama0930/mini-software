@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Library - All Books
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center my-4">All Books in the Library</h1>
+
+<!-- 図書リストを表示 -->
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="/static/uploads/{{ book[5] }}" class="card-img-top" alt="Book Cover">
+            <div class="card-body">
+                <h5 class="card-title">{{ book[1] }}</h5> <!-- 書籍のタイトル -->
+                <p class="card-text"><strong>Author:</strong> {{ book[2] }}</p> <!-- 著者名 -->
+                <p class="card-text"><strong>Keywords:</strong> {{ book[4] }}</p> <!-- キーワード -->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 書籍追加ページへのリンク -->
+<div class="text-center my-4">
+    <a class="btn btn-primary" href="{{ url_for('add_book') }}">Add New Book</a>
+</div>
+{% endblock %}
