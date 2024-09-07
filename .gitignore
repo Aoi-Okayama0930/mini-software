@@ -29,3 +29,5 @@ docker-compose.override.yml
 
 # MacOS関連
 .DS_Store
+
+#通知確認
