@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Book Detail
+{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p><strong>著者:</strong> {{ book.author }}</p>
+<p><strong>ISBN:</strong> {{ book.isbn }}</p>
+<p><strong>キーワード:</strong> {{ book.keywords }}</p>
+
+{% if book.is_borrowed %}
+    <p><strong>貸出中です</strong></p>
+    <p>返却予定日: {{ book.borrowed_until }}</p>
+    <p>使用目的: {{ book.borrow_purpose }}</p>
+{% else %}
+    <a href="{{ url_for('borrow_book_form', book_id=book.id) }}" class="btn btn-primary">この本を借りる</a>
+{% endif %}
+
+{% endblock %}
