@@ -1,0 +1,31 @@
+# Python関連
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 環境設定関連
+venv/
+.env
+*.env
+
+# データベースファイル
+*.db
+*.sqlite3
+
+# ログファイル
+*.log
+
+# Docker関連
+*.env
+docker-compose.override.yml
+
+# 静的ファイル（例：アップロードされた画像など）
+/static/uploads/
+
+# IDE関連
+.vscode/
+.idea/
+
+# MacOS関連
+.DS_Store
