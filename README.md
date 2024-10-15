@@ -3,7 +3,7 @@
 ### Requirements
 - Docker
 ### Getting Started
-1. `.env.sample` を参考に `.env` ファイルを作成。
+1. `.env.sample` を参考に `.env` ファイルを作成する。
 2. 以下のコマンドでコンテナを起動:
     ```bash
     $ docker compose up
