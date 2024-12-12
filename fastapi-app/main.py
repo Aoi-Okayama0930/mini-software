@@ -36,15 +36,15 @@ def init_db():
                 title TEXT NOT NULL,
                 author TEXT NOT NULL,
                 isbn TEXT NOT NULL,
-                keywords TEXT,
+                tags TEXT,
                 cover_image TEXT
         )
     ''')
-    # keywordsテーブルを作成
+    # tagsテーブルを作成
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS keywords (
+        CREATE TABLE IF NOT EXISTS tags (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                keyword TEXT NOT NULL UNIQUE
+                tag TEXT NOT NULL UNIQUE
             )
     ''')
     connection.commit()
@@ -67,8 +67,8 @@ async def home(request: Request):
 async def add_book(request: Request):
     with sqlite3.connect(DB_NAME) as conn:
         cursor = conn.cursor()
-        keywords = cursor.execute('SELECT keyword FROM keywords').fetchall()
-    return templates.TemplateResponse("add_book.html", {"request": request, "keywords": keywords})
+        tags = cursor.execute('SELECT tag FROM tags').fetchall()
+    return templates.TemplateResponse("add_book.html", {"request": request, "tags": tags})
 
 # All booksページのルート設定
 @app.get("/all_books", response_class=HTMLResponse)
@@ -81,7 +81,7 @@ async def all_books(request: Request):
 # 新しい書籍を追加するエンドポイント
 @app.post("/addBook")
 async def addBook(request: Request, title: str = Form(...), author: str = Form(...), isbn: str = Form(...), 
-                  keywords: str = Form(""), cover_image: UploadFile = File(None)):
+                  tags: str = Form(""), cover_image: UploadFile = File(None)):
     cover_image_filename = None
 
     if cover_image and cover_image.filename != "":
@@ -94,17 +94,17 @@ async def addBook(request: Request, title: str = Form(...), author: str = Form(.
     with sqlite3.connect(DB_NAME) as conn:
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO books (title, author, isbn, keywords, cover_image) 
+            INSERT INTO books (title, author, isbn, tags, cover_image) 
             VALUES (?, ?, ?, ?, ?)
-        ''', (title, author, isbn, keywords if keywords else None, cover_image_filename))
+        ''', (title, author, isbn, tags if tags else None, cover_image_filename))
         
-        if keywords:
-            for keyword in keywords.split(','):
+        if tags:
+            for tag in tags.split(','):
                 try:
                     cursor.execute('''
-                        INSERT INTO keywords (keyword) 
+                        INSERT INTO tags (tag) 
                         VALUES (?)
-                    ''', (keyword.strip(),))
+                    ''', (tag.strip(),))
                 except sqlite3.IntegrityError:
                     pass
 
@@ -114,11 +114,16 @@ async def addBook(request: Request, title: str = Form(...), author: str = Form(.
 
 # 図書リストを表示するエンドポイント
 @app.get('/showLibrary', response_class=HTMLResponse)
-async def showLibrary(request: Request, search_keyword: str = None):
+async def showLibrary(request: Request, search_tag: str = None):
     with sqlite3.connect(DB_NAME) as conn:
         cursor = conn.cursor()
-        if search_keyword:
-            books = cursor.execute('SELECT * FROM books WHERE keywords LIKE ?', ('%' + search_keyword + '%',)).fetchall()
+        if search_tag:
+            books = cursor.execute('SELECT * FROM books WHERE tags LIKE ?', ('%' + search_tag + '%',)).fetchall()
         else:
             books = cursor.execute('SELECT * FROM books').fetchall()
-    return templates.TemplateResponse('libraryList.html', {"request": request, "books": books, "search_keyword": search_keyword})
+        
+        # タグのリストを取得
+        tags = cursor.execute('SELECT DISTINCT tag FROM tags').fetchall()
+    
+    # テンプレートにタグを渡す
+    return templates.TemplateResponse('libraryList.html', {"request": request, "books": books, "tags": tags, "search_tag": search_tag})
