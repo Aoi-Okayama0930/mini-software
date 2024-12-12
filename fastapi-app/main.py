@@ -121,4 +121,6 @@ async def showLibrary(request: Request, search_keyword: str = None):
             books = cursor.execute('SELECT * FROM books WHERE keywords LIKE ?', ('%' + search_keyword + '%',)).fetchall()
         else:
             books = cursor.execute('SELECT * FROM books').fetchall()
-    return templates.TemplateResponse('libraryList.html', {"request": request, "books": books, "search_keyword": search_keyword})
+
+        keywords = cursor.execute('SELECT keyword FROM keywords').fetchall()
+    return templates.TemplateResponse('libraryList.html', {"request": request, "books": books, "keywords": keywords, "search_keyword": search_keyword})

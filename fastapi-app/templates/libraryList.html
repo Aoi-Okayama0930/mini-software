@@ -5,7 +5,7 @@ Library List
 {% endblock %}
 
 {% block content %}
-<h1>図書リスト</h1>
+<h1 class="mt-4">図書リスト</h1>
 
 <!-- キーワード検索フォーム -->
 <form action="{{ url_for('showLibrary') }}" method="get">
@@ -24,10 +24,10 @@ Library List
 <!-- 図書リストを表示 -->
 <div class="book-list mt-4">
     {% for book in books %}
-    <div class="book-item">
-        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover">
-        <h2>{{ book[1] }}</h2>
-        <p>{{ book[2] }}</p>
+    <div class="book-item mb-4">
+        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover mb-2">
+        <h2 class="mb-2">{{ book[1] }}</h2>
+        <p class="mb-2">{{ book[2] }}</p>
         <p>キーワード: {{ book[4] }}</p>
     </div>
     {% endfor %}
