@@ -5,30 +5,37 @@ Library List
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-4">図書リスト</h1>
+<h1 class="mb-4">図書リスト</h1>
 
-<!-- キーワード検索フォーム -->
-<form action="{{ url_for('showLibrary') }}" method="get">
-    <div class="form-group">
-        <label for="search_keyword">キーワード検索</label>
-        <select id="search_keyword" name="search_keyword" class="form-control">
-            <option value="">全てのキーワード</option>
-            {% for keyword in keywords %}
-            <option value="{{ keyword[0] }}">{{ keyword[0] }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">検索</button>
+<!-- タグ検索フォーム -->
+<form id="searchForm" action="{{ url_for('showLibrary') }}" method="get" class="mb-4">
+    <label for="search_tag" class="form-label">タグ検索</label>
+    <select class="form-select" id="search_tag" name="search_tag">
+        <option value="">select any tag</option>
+        {% for tag in tags %}
+        <option value="{{ tag[0] }}">{{ tag[0] }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">検索</button>
 </form>
 
+<!-- 選択されたタグを表示-->
+{% if search_tag %}
+<p class="mb-4">タグ検索: <strong>{{ search_tag }}</strong></p>
+{% endif %}
+
 <!-- 図書リストを表示 -->
-<div class="book-list mt-4">
+<div class="row">
     {% for book in books %}
-    <div class="book-item mb-4">
-        <img src="/static/uploads/{{ book[5] }}" alt="Book Cover" class="book-cover mb-2">
-        <h2 class="mb-2">{{ book[1] }}</h2>
-        <p class="mb-2">{{ book[2] }}</p>
-        <p>キーワード: {{ book[4] }}</p>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="/static/uploads/{{ book[5] }}" class="card-img-top" alt="Book Cover" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ book[1] }}</h5>
+                <p class="card-text">{{ book[2] }}</p>
+                <p class="card-text"><small class="text-muted">タグ: {{ book[4] }}</small></p>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
